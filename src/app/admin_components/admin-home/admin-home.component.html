@@ -1,0 +1,83 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary"> Home Design</h6>
+    </div>
+    <div class="card-body">
+  
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Query</th>
+            <th scope="col">Database</th>
+            <th scope="col">
+              <button type="button" (click)="onReportModal()" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#reportModal">add</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of reports">              
+            <td>{{report.Title}}</td>
+            <td>{{report.Type}}</td>
+            <td>{{report.Query}}</td>
+            <td>{{report.Database.Title}}</td>
+            <td>
+              <button (click)="onReportModal(report)" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#reportModal">
+                edit
+              </button>
+              <button (click)="deleteReport(report.Id)" type="button" class="btn btn-primary btn-sm">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+  
+  
+  <!--Report Modal -->
+  <div class="modal fade" id="reportModal" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #reportUpdateForm='ngForm' (ngSubmit)='reportSubmit(reportUpdateForm)'>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <input type="text" id="title" class="form-control" #title="ngModel" [(ngModel)]="reportmodel.Title"
+                name="title" placeholder="Title" required>
+            </div>
+            <div class="form-group">
+                <label for="database">Type</label>
+                <select class="form-control" id="type" required [(ngModel)]="reportmodel.Type" name="type">
+                  <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                </select>
+              </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Query</label>
+              <textarea class="form-control" id="query" #query="ngModel" [(ngModel)]="reportmodel.Query" name="query"
+                placeholder="Query" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="database">Database</label>
+              <select class="form-control" id="database" #database="ngModel" required [(ngModel)]="reportmodel.Database" name="database">
+                <option *ngFor="let data of databases" [ngValue]="data">{{data.Title}}</option>
+              </select>
+            </div>
+            <input class="btn btn-secondary form-control" type="submit" value="Submit">
+          </form>        
+        </div>
+      </div>
+    </div>
+  </div>

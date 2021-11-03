@@ -1,0 +1,33 @@
+<!-- DataTales Example -->
+<div  class="card shadow mb-4">
+    <div  class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"> Table</h6>
+    </div>
+    <div class="card-body">
+        <div *ngIf = 'data' class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead  >
+                                <tr >
+                                    <th *ngFor="let item of data[0] | keyvalue:keepOriginalOrder" role="row" class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 155px;">{{item.key}}
+                                    </th>                                   
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let items of data" role="row" role="row" class="odd">
+                                    <td *ngFor="let item of items | keyvalue:keepOriginalOrder" class="sorting_1" data-editable="true">{{item.value}} </td>                                                                       
+                                </tr>                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

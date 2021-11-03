@@ -1,0 +1,53 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <h2>{{path}}</h2>
+      </div>
+  
+      <!-- Login Form -->
+      <div *ngIf="loginError" class="errmes  alert-danger">{{loginError}}</div>
+
+      <form *ngIf="path ==='login'" #loginForm='ngForm' (ngSubmit)='loginSubmit(loginForm)'>
+
+        <input  (input)="cleanLoginError()" type="text" id="username" class="fadeIn second form-control"  #username="ngModel" [(ngModel)]="loginmodel.username" name="username" placeholder="username" required>
+        <div [hidden]="username.valid || username.pristine" class="errmes  alert-danger">Name is required</div>
+        
+
+        <input (input)="cleanLoginError()" type="password" id="password" class="fadeIn second form-control" #password="ngModel" [(ngModel)]="loginmodel.password" name="password" placeholder="password" required>
+        <div [hidden]="password.valid || password.pristine" class="errmes  alert-danger">password is required</div>
+        
+        
+        <input type="submit" class="fadeIn fourth" [disabled]="loginForm.invalid" value="Log In">
+      </form>
+      
+
+      <!-- Register Form -->
+      <div *ngIf="registerError" class="errmes  alert-danger">{{registerError}}</div>
+      <div *ngIf="registerSuccess" class="errmes  alert-success">{{registerSuccess}}</div>
+
+      <form *ngIf="path ==='register'"  #registerForm='ngForm' (ngSubmit)='registerSubmit(registerForm)'>
+
+        <input type="text" id="username" class="fadeIn second form-control"  #username="ngModel" [(ngModel)]="registermodel.username" name="username" placeholder="username" required>
+        <div [hidden]="username.valid || username.pristine" class="errmes  alert-danger">Name is required</div>
+
+        <input type="password" id="password" class="fadeIn second form-control" #password="ngModel" [(ngModel)]="registermodel.password" name="password" placeholder="password" required>
+        <div [hidden]="password.valid || password.pristine" class="errmes  alert-danger">password is required</div>
+
+        <input type="password" id="againpassword" class="fadeIn second form-control" #againpassword="ngModel" [(ngModel)]="registermodel.againpassword" name="againpassword" placeholder="again password" required>
+        <div [hidden]="againpassword.valid || againpassword.pristine" class="errmes  alert-danger ">password is required</div>
+     
+        <input type="submit" class="fadeIn fourth" [disabled]="registerForm.invalid" value={{path}}>
+      </form>
+      
+      
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a *ngIf="path !='login'" class="underlineHover" routerLink='/login'>Login  </a>
+        <a *ngIf="path !='register'" class="underlineHover" routerLink='/register'>Regisret  </a>
+      </div>
+  
+    </div>
+  </div>

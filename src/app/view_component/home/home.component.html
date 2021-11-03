@@ -1,0 +1,7 @@
+<div class="row">
+    <div *ngFor="let result of homeResult" [class]="sizeClass(result.Type)">
+    <app-area-chart  *ngIf="result.Type ==='area'" [chartmodels]="result.Data" [title]="result.Title"></app-area-chart>
+    <app-donut-chart  *ngIf="result.Type ==='donut'" [chartmodels]="result.Data" [title]="result.Title"></app-donut-chart>
+    <app-table  *ngIf="result.Type ==='table'" [data]="result.TableData" [title]="result.Title"></app-table>
+</div>
+</div>

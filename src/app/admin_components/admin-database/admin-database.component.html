@@ -1,0 +1,68 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary"> Databases</h6>
+    </div>
+    <div class="card-body">
+  
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">ConnectionString</th>
+            <th scope="col">
+              <button (click)="onDatabaseModal()" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+              data-target="#databaseModal">
+              add
+            </button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let database of databases">
+            <th scope="row">{{database.Title}}</th>
+            <td>{{database.ConnectionString}}</td>
+            <td>
+              <button (click)="onDatabaseModal(database)" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#databaseModal">
+                edit
+              </button>
+              <button (click)="deleteDatabase(database.Id)" type="button" class="btn btn-primary btn-sm">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+  
+  <!--Database Modal -->
+  <div class="modal fade" id="databaseModal" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #databaseForm='ngForm' (ngSubmit)='databaseSubmit(databaseForm)'>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <input type="text" id="title" class="form-control" #title="ngModel" [(ngModel)]="databasemodel.Title"
+                name="title" placeholder="Title" required>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">ConnectionString</label>
+              <textarea class="form-control" id="connection" #connection="ngModel" [(ngModel)]="databasemodel.ConnectionString" name="connection"
+                placeholder="Connection String" required></textarea>
+            </div>
+            
+            <input class="btn btn-secondary form-control" type="submit" value="Submit">
+          </form>        
+        </div>
+      </div>
+    </div>
+  </div>
